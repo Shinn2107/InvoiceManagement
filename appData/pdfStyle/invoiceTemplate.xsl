@@ -36,27 +36,20 @@
                             <fo:table-row>
                                 <fo:table-cell>
                                     <fo:block id="image">
-                                        <!--<fo:external-graphic src="url('C:/Dev/XML and XSL tutorial/Rechnung/logo.png')" width="200px" height="50px"/> -->
+                                        <fo:external-graphic src="file:appData/logo/logoThiel_smaller.png"/>
                                     </fo:block>
                                 </fo:table-cell>
 
-                                <fo:table-cell>
-                                    <fo:block start-indent="0.2in" font-size="10pt" margin-left="100pt" text-align="left">
-                                        <fo:block>
-                                            <xsl:value-of select="ORDER/ISSUER/companyName" />
-                                        </fo:block>
-                                        <fo:block>
-                                            <xsl:value-of select="ORDER/ISSUER/address" />
-                                        </fo:block>
-                                        <fo:block>
-                                            <xsl:value-of select="ORDER/ISSUER/city" />
-                                        </fo:block>
-
-
-                                    </fo:block>
-                                </fo:table-cell>
+                                
 
                             </fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block end-indent="0.2in"  font-size="8pt" text-align="left">
+										<xsl:value-of select="ORDER/ISSUER/companyName" />  <xsl:value-of select="ORDER/ISSUER/address" /> <xsl:value-of select="ORDER/ISSUER/city" />
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
 
                         </fo:table-body>
 
@@ -68,6 +61,7 @@
                             <fo:table-row>
                                 <!-- Left Cell -->
                                 <fo:table-cell>
+									
                                     <fo:block end-indent="0.2in"  font-size="10pt" text-align="left">
 
 
@@ -90,18 +84,26 @@
                                     </fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell>
-                                    <fo:block space-before="30px"/>
-                                    <fo:block end-indent="0.2in" font-size="10pt" margin-left="100pt" text-align="left">
-                                        Rechnungserstelldatum:
-                                        <fo:inline space-start="0.5cm" >
-                                            <xsl:value-of select="ORDER/HEAD/orderCreationDate" />
-                                        </fo:inline>
+                                    <fo:block start-indent="0.2in" font-size="10pt" margin-left="100pt" text-align="left">
+                                        <fo:block>
+                                            <xsl:value-of select="ORDER/ISSUER/companyName" />
+                                        </fo:block>
+                                        <fo:block>
+                                            <xsl:value-of select="ORDER/ISSUER/address" />
+                                        </fo:block>
+                                        <fo:block>
+                                            <xsl:value-of select="ORDER/ISSUER/city" />
+                                        </fo:block>
+
+
                                     </fo:block>
                                 </fo:table-cell>
 
                             </fo:table-row>
                         </fo:table-body>
                     </fo:table>
+					
+					
 
                     <fo:block-container id="text_content" font-size="10pt" width="100%">
                         <fo:block id="text_header" space-before="50px" font-size="14pt">
@@ -109,30 +111,51 @@
                                 Rechnung
                             </fo:inline>
                         </fo:block>
-                        <fo:block space-before="20px"/>
-                        <fo:block>
-                            Bestellnummer:
-                            <fo:inline space-start="0.5cm" >
-                                <xsl:value-of select="ORDER/HEAD/orderNumber"/>
-                            </fo:inline>
-                        </fo:block>
-
-                        <fo:block>
-                            Kundennummer:
-                            <fo:inline space-start="0.9cm" >
-                                <xsl:value-of select="ORDER/HEAD/customerNumber"/>
-                            </fo:inline>
-                        </fo:block>
-
-                        <fo:block space-before="5px"/>
+                        <fo:block space-before="10px"/>
+						<fo:table id="text_content_table">
+							<fo:table-column column-width="33%"/>
+                            <fo:table-column column-width="33%"/>
+                            <fo:table-column column-width="32%"/>
+							<fo:table-body>
+								<fo:table-row>
+									<!-- Left Cell -->
+									<fo:table-cell>
+										<fo:block>
+											Bestellnummer:
+											<fo:inline space-start="0.5cm" >
+												<xsl:value-of select="ORDER/HEAD/orderNumber"/>
+											</fo:inline>
+										</fo:block>
+									</fo:table-cell>
+									<fo:table-cell>
+										<fo:block>
+											Kundennummer:
+											<fo:inline space-start="0.5cm" >
+												<xsl:value-of select="ORDER/HEAD/customerNumber"/>
+											</fo:inline>
+										</fo:block>
+									</fo:table-cell>
+									<fo:table-cell>
+										<fo:block>
+											Datum:
+											<fo:inline space-start="0.5cm" >
+												<xsl:value-of select="ORDER/HEAD/orderCreationDate" />
+											</fo:inline>
+										</fo:block>
+									</fo:table-cell>
+	  
+								</fo:table-row>
+							</fo:table-body>
+						</fo:table>
+                        
+                        <fo:block space-before="10px"/>
 
                         <fo:table>
 
-                            <fo:table-column column-width="12%"/>
+                            <fo:table-column column-width="10%"/>
                             <fo:table-column column-width="50%"/>
-                            <fo:table-column column-width="7%"/>
                             <fo:table-column column-width="15%"/>
-                            <fo:table-column column-width="15%"/>
+                            <fo:table-column column-width="25%"/>
 
                             <fo:table-header border="solid black 1px">
                                 <fo:table-cell border-right="solid black 1px" padding="2px">
@@ -163,16 +186,13 @@
                                         <fo:table-cell border-right="solid black 0.5px" padding="5px">
                                             <fo:block><xsl:value-of select="quantity"/> <xsl:value-of select="unit"/></fo:block>
                                         </fo:table-cell>
-                                        <fo:table-cell padding="5px">
+                                        <fo:table-cell border-right="solid black 0.5px" padding="5px">
                                             <fo:block><xsl:value-of select="totalPrice"/></fo:block>
                                         </fo:table-cell>
 
                                     </fo:table-row>
                                 </xsl:for-each>
                                 <fo:table-row>
-                                    <fo:table-cell border-right="solid black 0.5px" border-bottom="solid black 1px" padding="2px">
-                                        <fo:block></fo:block>
-                                    </fo:table-cell>
                                     <fo:table-cell border-right="solid black 0.5px" border-bottom="solid black 1px" padding="2px">
                                         <fo:block></fo:block>
                                     </fo:table-cell>
@@ -214,7 +234,7 @@
                                     <fo:table-cell>
                                         <fo:block font-size="10pt">
                                             + <fo:inline space-start="29.5pt">
-                                            Umsatzsteuer (<xsl:value-of select="ORDER/TOTALS/tax"/>):
+                                            MwSt (<xsl:value-of select="ORDER/TOTALS/tax"/>):
                                         </fo:inline>
                                         </fo:block>
                                     </fo:table-cell>

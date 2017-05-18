@@ -4,6 +4,9 @@ package com.devfriendly.core.pdf.impl;
 import javax.xml.transform.TransformerFactory;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -54,7 +57,9 @@ public class InvoicePDFCreationIntegrationTest {
 
     private OrderData createOrderData() {
         OrderData orderData = new OrderData();
-        orderData.setCreationTime(Calendar.getInstance().getTime().toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDateTime dateTime = LocalDateTime.now();
+        orderData.setCreationTime(dateTime.format(formatter));
         orderData.setOrderNumber("101");
         orderData.setTotalsData(createTotalsData());
         orderData.setCustomerNumber("1");
@@ -79,7 +84,7 @@ public class InvoicePDFCreationIntegrationTest {
         orderItemData2.setUnit("Stk.");
         orderItemData2.setTotalPrice("10 €");
 
-        return Arrays.asList(orderItemData,orderItemData2);
+        return Arrays.asList(orderItemData,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2,orderItemData2);
     }
 
     private TotalsData createTotalsData() {
